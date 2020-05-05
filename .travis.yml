@@ -1,7 +1,8 @@
 sudo: required
+language: generic
 services:
         - docker
 before_install:
-        - docker build -t ramsuresh/docker-react -f Dockerfile.dev
+        - docker build -t ramsureshn/myapp -f Dockerfile.dev .
 script:
-        - docker run -c CI=true ramsureshn/docker-react npm run test
+        - docker run -e CI=true ramsureshn/myapp npm run test
