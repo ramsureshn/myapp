@@ -1,19 +1,23 @@
-sudo: required
 language: generic
+sudo: required
+
 services:
         - docker
+
 before_install:
         - docker build -t ramsureshn/myapp -f Dockerfile.dev .
+
 script:
         - docker run -e CI=true ramsureshn/myapp npm run test
+
 deploy:
-        provider: elasticbeanstalk
-        region: ap-southeast-1
-        app: myapp
-        env: Myapp-env
-        bucket_name: 'elasticbeanstalk-ap-southeast-1-737602186686'
-        bucket_path: 'myapp'
-on:
+     provider: elasticbeanstalk
+     region: "ap-southeast-1"
+     app: "myapp"
+     env: "Myapp-env"
+     bucket_name: "elasticbeanstalk-ap-southeast-1-737602186686"
+     bucket_path: "myapp"
+     on:
         branch: master
-access_key_id: $AWS_access_key
-secret_access_key: $AWS_secret_key
+     access_key_id: $AWS_access_key
+     secret_access_key: $AWS_secret_key
